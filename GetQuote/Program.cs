@@ -27,14 +27,18 @@ namespace GetQuote
       StreamReader reader = new StreamReader(dataStream);
       // Read the content.
       string responseFromServer = reader.ReadToEnd();
-      // Display the content.
-      //Console.WriteLine(responseFromServer);
-      // search for  <div class="text-center">
-
-      Console.ReadKey();
       // Clean up the streams and the response.
       reader.Close();
       response.Close();
+      // Display the content.
+      Console.WriteLine(responseFromServer);
+      // parcours du DOM et recherche de <div class="text-center">
+      var lines = responseFromServer.ToList();
+
+
+
+      Console.WriteLine("Press a key to exit:");
+      Console.ReadKey();
     }
   }
 }
