@@ -1,0 +1,6 @@
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\bin\Debug\GetQuote.exe.config
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\obj\Debug\GetQuote.csprojResolveAssemblyReference.cache
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\bin\Debug\GetQuote.exe
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\bin\Debug\GetQuote.pdb
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\obj\Debug\GetQuote.exe
+c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\obj\Debug\GetQuote.pdb
