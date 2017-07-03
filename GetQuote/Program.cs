@@ -33,9 +33,20 @@ namespace GetQuote
       // Display the content.
       Console.WriteLine(responseFromServer);
       // parcours du DOM et recherche de <div class="text-center">
-      var lines = responseFromServer.ToList();
-
-
+      List<string> lines = new List<string>();
+      string tmp = string.Empty;
+      for (int i = 0; i < responseFromServer.Length - 1; i++)
+      {
+        if (responseFromServer[i] == '\r')
+        {
+          lines.Add(tmp);
+          tmp = string.Empty;
+        }
+        else
+        {
+          tmp += responseFromServer[i];
+        }
+      }
 
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
