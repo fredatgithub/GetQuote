@@ -13,3 +13,6 @@ D:\dev\GetQuote\GetQuote\obj\Debug\GetQuote.pdb
 D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.dll
 D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.pdb
 D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml
+C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.dll
+C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml

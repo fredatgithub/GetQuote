@@ -56,13 +56,32 @@ namespace GetQuote
           dicoQuotes.Add(tmpKey, tmpValue);
         }
       }
-      
+
       //foreach (HtmlNode htmlNode in quotes)
       //{
       //  string tmp = htmlNode.InnerText.Trim().Trim('"');
       //  Console.WriteLine(tmp);
       //}
 
+      string fileName = "quotes.txt";
+      if (dicoQuotes.Count != 0)
+      {
+        if (!File.Exists(fileName))
+        {
+          StreamWriter sw2 = new StreamWriter(fileName, false);
+          sw2.WriteLine(string.Empty);
+          sw2.Close();
+        }
+
+        StreamWriter sw = new StreamWriter(fileName, true);
+        foreach (var quote in dicoQuotes)
+        {
+          sw.WriteLine(quote.Key);
+          sw.WriteLine(quote.Value);
+        }
+
+        sw.Close();
+      }
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
     }
