@@ -4,3 +4,12 @@ c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\bin\Debug\
 c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\bin\Debug\GetQuote.pdb
 c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\obj\Debug\GetQuote.exe
 c:\users\fred\documents\visual studio 2012\Projects\GetQuote\GetQuote\obj\Debug\GetQuote.pdb
+D:\dev\GetQuote\GetQuote\bin\Debug\GetQuote.exe.config
+D:\dev\GetQuote\GetQuote\bin\Debug\GetQuote.exe
+D:\dev\GetQuote\GetQuote\bin\Debug\GetQuote.pdb
+D:\dev\GetQuote\GetQuote\obj\Debug\GetQuote.csprojResolveAssemblyReference.cache
+D:\dev\GetQuote\GetQuote\obj\Debug\GetQuote.exe
+D:\dev\GetQuote\GetQuote\obj\Debug\GetQuote.pdb
+D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.dll
+D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.pdb
+D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml

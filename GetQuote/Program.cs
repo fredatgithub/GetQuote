@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using HtmlAgilityPack;
 
 namespace GetQuote
 {
-  class Program
+  internal class Program
   {
-    static void Main(string[] args)
+    private static void Main()
     {
       // Create a request for the URL. 
       WebRequest request = WebRequest.Create(
@@ -31,22 +30,32 @@ namespace GetQuote
       reader.Close();
       response.Close();
       // Display the content.
-      Console.WriteLine(responseFromServer);
+      //Console.WriteLine(responseFromServer);
       // parcours du DOM et recherche de <div class="text-center">
-      List<string> lines = new List<string>();
-      string tmp = string.Empty;
-      for (int i = 0; i < responseFromServer.Length - 1; i++)
+      Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
+      var source = WebUtility.HtmlDecode(responseFromServer);
+      HtmlDocument resultat = new HtmlDocument();
+      resultat.LoadHtml(source);
+      List<HtmlNode> quotes = resultat.DocumentNode.Descendants().Where
+      (x => x.Name == "div" && x.Attributes["class"] != null &&
+            x.Attributes["class"].Value.Contains("text-center")).ToList();
+      if (quotes.Count != 0)
       {
-        if (responseFromServer[i] == '\r')
+        string tmpKey = quotes[0].InnerText.Trim().Trim('"');
+        Console.WriteLine(tmpKey);
+        string tmpValue = quotes[1].InnerText.Trim().Trim('"');
+        Console.WriteLine(tmpValue);
+        if (!dicoQuotes.ContainsKey(tmpKey))
         {
-          lines.Add(tmp);
-          tmp = string.Empty;
-        }
-        else
-        {
-          tmp += responseFromServer[i];
+          dicoQuotes.Add(tmpKey, tmpValue);
         }
       }
+      
+      //foreach (HtmlNode htmlNode in quotes)
+      //{
+      //  string tmp = htmlNode.InnerText.Trim().Trim('"');
+      //  Console.WriteLine(tmp);
+      //}
 
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
