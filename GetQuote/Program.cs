@@ -19,7 +19,7 @@ namespace GetQuote
       // Get the response.
       WebResponse response = request.GetResponse();
       // Display the status.
-      Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+      //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
       // Get the stream containing content returned by the server.
       Stream dataStream = response.GetResponseStream();
       // Open the stream using a StreamReader for easy access.
@@ -41,9 +41,15 @@ namespace GetQuote
             x.Attributes["class"].Value.Contains("text-center")).ToList();
       if (quotes.Count != 0)
       {
-        string tmpKey = quotes[0].InnerText.Trim().Trim('"');
+        string tmpKey = quotes[0].InnerText.Trim();
+        tmpKey = tmpKey.Replace('"', ' ').Trim();
+        if (tmpKey.StartsWith('"'.ToString()))
+        {
+          tmpKey = tmpKey.Substring(1, tmpKey.Length - 2);
+        }
         Console.WriteLine(tmpKey);
-        string tmpValue = quotes[1].InnerText.Trim().Trim('"');
+        string tmpValue = quotes[1].InnerText.Trim();
+        tmpValue = tmpValue.Replace('"', ' ').Trim();
         Console.WriteLine(tmpValue);
         if (!dicoQuotes.ContainsKey(tmpKey))
         {
