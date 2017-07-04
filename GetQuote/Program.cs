@@ -57,12 +57,6 @@ namespace GetQuote
         }
       }
 
-      //foreach (HtmlNode htmlNode in quotes)
-      //{
-      //  string tmp = htmlNode.InnerText.Trim().Trim('"');
-      //  Console.WriteLine(tmp);
-      //}
-
       string fileName = "quotes.txt";
       if (dicoQuotes.Count != 0)
       {
