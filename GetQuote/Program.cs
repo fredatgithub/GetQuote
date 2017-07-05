@@ -11,7 +11,7 @@ namespace GetQuote
   {
     private static void Main()
     {
-      int numberOfQuotes = 500;
+      const int numberOfQuotes = 900;
       for (int i = 0; i < numberOfQuotes; i++)
       {
         GetQuote();
