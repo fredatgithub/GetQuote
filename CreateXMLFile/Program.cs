@@ -18,6 +18,21 @@ namespace CreateXMLFile
         //Console.WriteLine(line);
         quotesList.Add(line);
       }
+
+      for (int i = 0; i < quotesList.Count; i = i + 2)
+      {
+        if (!dicoQuotes.ContainsKey(quotesList[i]))
+        {
+          dicoQuotes.Add(quotesList[i], quotesList[i + 1]);
+        }
+        else
+        {
+          Console.WriteLine(quotesList[i]);
+        }
+      }
+
+      Console.WriteLine("Press a key to exit:");
+      Console.ReadKey();
     }
   }
 }
