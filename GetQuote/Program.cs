@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using HtmlAgilityPack;
 
 namespace GetQuote
 {
-  internal class Program
+  internal static class Program
   {
     private static void Main()
     {
@@ -47,9 +48,11 @@ namespace GetQuote
         {
           tmpKey = tmpKey.Substring(1, tmpKey.Length - 2);
         }
+
         Console.WriteLine(tmpKey);
         string tmpValue = quotes[1].InnerText.Trim();
-        tmpValue = tmpValue.Replace('"', ' ').Trim();
+        tmpValue = tmpValue.Replace('“', ' ').Trim();
+        tmpValue = tmpValue.Replace('”', ' ').Trim();
         Console.WriteLine(tmpValue);
         if (!dicoQuotes.ContainsKey(tmpKey))
         {
@@ -57,7 +60,7 @@ namespace GetQuote
         }
       }
 
-      string fileName = "quotes.txt";
+      const string fileName = "quotes.txt";
       if (dicoQuotes.Count != 0)
       {
         if (!File.Exists(fileName))
@@ -67,17 +70,33 @@ namespace GetQuote
           sw2.Close();
         }
 
-        StreamWriter sw = new StreamWriter(fileName, true);
-        foreach (var quote in dicoQuotes)
+        // before adding to file, check if it doesn't exist already
+        if (!QuoteAlreadySaved(dicoQuotes.Keys.First(), fileName))
         {
-          sw.WriteLine(quote.Key);
-          sw.WriteLine(quote.Value);
-        }
+          StreamWriter sw = new StreamWriter(fileName, true);
+          foreach (var quote in dicoQuotes)
+          {
+            sw.WriteLine(quote.Key);
+            sw.WriteLine(quote.Value);
+          }
 
-        sw.Close();
+          sw.Close();
+        }
+        
       }
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private static bool QuoteAlreadySaved(string oneQuote, string fileName)
+    {
+      bool result = false;
+      if (!File.Exists(fileName)) return false;
+      StreamReader sr = new StreamReader(fileName);
+      var fileContent = sr.ReadToEnd();
+      sr.Close();
+      result = fileContent.Contains(oneQuote);
+      return result;
     }
   }
 }
