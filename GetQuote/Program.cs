@@ -84,8 +84,14 @@ namespace GetQuote
         }
         
       }
+
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private static void GetWebResponse()
+    {
+      
     }
 
     private static bool QuoteAlreadySaved(string oneQuote, string fileName)
