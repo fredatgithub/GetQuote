@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
 using HtmlAgilityPack;
 
 namespace GetQuote
@@ -12,15 +11,26 @@ namespace GetQuote
   {
     private static void Main()
     {
+      int numberOfQuotes = 500;
+      for (int i = 0; i < numberOfQuotes; i++)
+      {
+        GetQuote();
+      }
+
+      Console.WriteLine("Press a key to exit:");
+      Console.ReadKey();
+    }
+
+    private static void GetQuote()
+    {
       // Create a request for the URL. 
-      WebRequest request = WebRequest.Create(
-        "http://www.badnuke.com/");
+      WebRequest request = WebRequest.Create("http://www.badnuke.com/");
       // If required by the server, set the credentials.
-      request.Credentials = CredentialCache.DefaultCredentials;
+      //request.Credentials = CredentialCache.DefaultCredentials;
       // Get the response.
       WebResponse response = request.GetResponse();
       // Display the status.
-      Console.WriteLine($"status: {((HttpWebResponse) response).StatusDescription}");
+      Console.WriteLine($"status: {((HttpWebResponse)response).StatusDescription}");
       // Get the stream containing content returned by the server.
       Stream dataStream = response.GetResponseStream();
       // Open the stream using a StreamReader for easy access.
@@ -82,16 +92,8 @@ namespace GetQuote
 
           sw.Close();
         }
-        
+
       }
-
-      Console.WriteLine("Press a key to exit:");
-      Console.ReadKey();
-    }
-
-    private static void GetWebResponse()
-    {
-      
     }
 
     private static bool QuoteAlreadySaved(string oneQuote, string fileName)
