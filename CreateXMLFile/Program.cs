@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace CreateXMLFile
 {
@@ -23,27 +24,39 @@ namespace CreateXMLFile
       StreamWriter sw = new StreamWriter(XmlFileName, false);
       foreach (KeyValuePair<string, string> keyValuePair in dicoQuotes)
       {
-        sw.WriteLine(string.Empty);
+        sw.WriteLine(CreateOneQuote(keyValuePair.Value, keyValuePair.Key));
       }
 
       sw.Close();
-
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
     }
 
-    private static string AddTag(string msg)
+    private static string CreateOneQuote(string author, string theQuote)
     {
-      string result = string.Empty;
+      StringBuilder result = new StringBuilder();
+      result.Append("<Quote>");
+      result.Append(Environment.NewLine);
+      result.Append("<Author>");
+      result.Append(author);
+      result.Append("</Author>");
+      result.Append(Environment.NewLine);
+      result.Append("<Language>French</Language>");
+      result.Append(Environment.NewLine);
+      result.Append("<QuoteValue>");
+      result.Append(theQuote);
+      result.Append("</QuoteValue>");
+      result.Append(Environment.NewLine);
+      result.Append("</Quote>");
+      result.Append(Environment.NewLine);
       /*
-       *<Quote>
+        <Quote>
           <Author></Author>
           <Language>French</Language>
           <QuoteValue></QuoteValue>
         </Quote> 
        */
-
-      return result;
+      return result.ToString();
     }
 
     private static Dictionary<string, string> LoadDictionary(string fileName)
