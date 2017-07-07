@@ -48,7 +48,6 @@ namespace CreateXMLFile
       result.Append("</QuoteValue>");
       result.Append(Environment.NewLine);
       result.Append("</Quote>");
-      result.Append(Environment.NewLine);
       /*
         <Quote>
           <Author></Author>
