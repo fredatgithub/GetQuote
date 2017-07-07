@@ -44,7 +44,7 @@ namespace CreateXMLFile
       result.Append("<Language>French</Language>");
       result.Append(Environment.NewLine);
       result.Append("<QuoteValue>");
-      result.Append(theQuote);
+      result.Append(theQuote.EndsWith(".")?theQuote.Substring(0, theQuote.Length-1):theQuote);
       result.Append("</QuoteValue>");
       result.Append(Environment.NewLine);
       result.Append("</Quote>");
