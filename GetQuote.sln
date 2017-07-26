@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetQuote", "GetQuote\GetQuo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateXMLFile", "CreateXMLFile\CreateXMLFile.csproj", "{BFD0DE07-DA5B-4A72-B37B-169E46166BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetQuote2", "GetQuote2\GetQuote2.csproj", "{60880183-F99E-47C4-82A6-DA6055FA96AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BFD0DE07-DA5B-4A72-B37B-169E46166BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFD0DE07-DA5B-4A72-B37B-169E46166BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFD0DE07-DA5B-4A72-B37B-169E46166BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60880183-F99E-47C4-82A6-DA6055FA96AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60880183-F99E-47C4-82A6-DA6055FA96AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60880183-F99E-47C4-82A6-DA6055FA96AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60880183-F99E-47C4-82A6-DA6055FA96AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
