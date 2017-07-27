@@ -8,9 +8,9 @@ using Jurassic.Library;
 
 namespace GetQuote2
 {
-  class Program
+  internal static class Program
   {
-    static void Main(string[] args)
+    private static void Main()
     {
       const int numberOfQuotes = 2;
       for (int i = 0; i < numberOfQuotes; i++)
@@ -20,7 +20,6 @@ namespace GetQuote2
 
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
-
     }
 
     private static void GetQuote()
