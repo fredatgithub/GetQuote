@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
+using Jurassic.Library;
 
 namespace GetQuote2
 {
@@ -53,53 +55,66 @@ namespace GetQuote2
       var source = WebUtility.HtmlDecode(responseFromServer);
       HtmlDocument resultat = new HtmlDocument();
       resultat.LoadHtml(source);
-      List<HtmlNode> quotes = resultat.DocumentNode.Descendants().Where
-      (x => x.Name == "div" && x.Attributes["class"] != null &&
-            x.Attributes["class"].Value.Contains("text-center")).ToList();
-      if (quotes.Count != 0)
-      {
-        string tmpKey = quotes[0].InnerText.Trim();
-        tmpKey = tmpKey.Replace('"', ' ').Trim();
-        if (tmpKey.StartsWith('"'.ToString()))
-        {
-          tmpKey = tmpKey.Substring(1, tmpKey.Length - 2);
-        }
 
-        Console.WriteLine(tmpKey);
-        string tmpValue = quotes[1].InnerText.Trim();
-        tmpValue = tmpValue.Replace('“', ' ').Trim();
-        tmpValue = tmpValue.Replace('”', ' ').Trim();
-        Console.WriteLine(tmpValue);
-        if (!dicoQuotes.ContainsKey(tmpKey))
-        {
-          dicoQuotes.Add(tmpKey, tmpValue);
-        }
-      }
+      HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+      doc.LoadHtml(source);
+      var script = doc.DocumentNode.Descendants()
+        .Where(n => n.Name == "script")
+        .First().InnerText;
 
-      const string fileName = "quotes.txt";
-      if (dicoQuotes.Count != 0)
-      {
-        if (!File.Exists(fileName))
-        {
-          StreamWriter sw2 = new StreamWriter(fileName, false);
-          sw2.WriteLine(string.Empty);
-          sw2.Close();
-        }
+      // Return the data of spect and stringify it into a proper JSON object
+      var engine = new Jurassic.ScriptEngine();
+      var result = engine.Evaluate("(function() { " + script + " return splashQuoteJson; })()");
+      var json = JSONObject.Stringify(engine, result);
 
-        // before adding to file, check if it doesn't exist already
-        if (!QuoteAlreadySaved(dicoQuotes.Keys.First(), fileName))
-        {
-          StreamWriter sw = new StreamWriter(fileName, true);
-          foreach (var quote in dicoQuotes)
-          {
-            sw.WriteLine(quote.Key);
-            sw.WriteLine(quote.Value);
-          }
+      Console.WriteLine(json);
 
-          sw.Close();
-        }
+      //List<HtmlNode> quotes = resultat.DocumentNode.Descendants().Where
+      //(x => x.Name == "div" && x.Attributes["class"] != null &&
+      //      x.Attributes["class"].Value.Contains("text-center")).ToList();
+      //if (quotes.Count != 0)
+      //{
+      //  string tmpKey = quotes[0].InnerText.Trim();
+      //  tmpKey = tmpKey.Replace('"', ' ').Trim();
+      //  if (tmpKey.StartsWith('"'.ToString()))
+      //  {
+      //    tmpKey = tmpKey.Substring(1, tmpKey.Length - 2);
+      //  }
 
-      }
+      //  Console.WriteLine(tmpKey);
+      //  string tmpValue = quotes[1].InnerText.Trim();
+      //  tmpValue = tmpValue.Replace('“', ' ').Trim();
+      //  tmpValue = tmpValue.Replace('”', ' ').Trim();
+      //  Console.WriteLine(tmpValue);
+      //  if (!dicoQuotes.ContainsKey(tmpKey))
+      //  {
+      //    dicoQuotes.Add(tmpKey, tmpValue);
+      //  }
+      //}
+
+      //const string fileName = "quotes.txt";
+      //if (dicoQuotes.Count != 0)
+      //{
+      //  if (!File.Exists(fileName))
+      //  {
+      //    StreamWriter sw2 = new StreamWriter(fileName, false);
+      //    sw2.WriteLine(string.Empty);
+      //    sw2.Close();
+      //  }
+
+      //  // before adding to file, check if it doesn't exist already
+      //  if (!QuoteAlreadySaved(dicoQuotes.Keys.First(), fileName))
+      //  {
+      //    StreamWriter sw = new StreamWriter(fileName, true);
+      //    foreach (var quote in dicoQuotes)
+      //    {
+      //      sw.WriteLine(quote.Key);
+      //      sw.WriteLine(quote.Value);
+      //    }
+
+      //    sw.Close();
+      //  }
+      //}
     }
 
     private static bool QuoteAlreadySaved(string oneQuote, string fileName)
