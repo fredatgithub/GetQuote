@@ -52,6 +52,9 @@ namespace GetQuote2
 
       HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
       doc.LoadHtml(source);
+
+      // get only the one with quotes
+      // and then var result = JsonConvert.DeserializeObject<List<Quote>>(json);
       var script = doc.DocumentNode.Descendants()
         .Where(n => n.Name == "script")
         .First().InnerText;
