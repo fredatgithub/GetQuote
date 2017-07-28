@@ -4,6 +4,6 @@ namespace DeserializeJson
 {
   internal class ListOfQuotes
   {
-    public List<RootObject> data { get; set; };
+    public List<Quote> theListOfQuotes { get; set; }
   }
 }

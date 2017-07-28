@@ -12,12 +12,7 @@ namespace GetQuote2
   {
     private static void Main()
     {
-      const int numberOfQuotes = 2;
-      for (int i = 0; i < numberOfQuotes; i++)
-      {
-        GetQuote();
-      }
-
+      GetQuote();
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
     }

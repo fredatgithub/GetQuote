@@ -1,11 +1,22 @@
-﻿namespace DeserializeJson
+﻿using Newtonsoft.Json;
+
+namespace DeserializeJson
 {
-  internal class RootObject
+  internal class Quote
   {
-    public string a_url { get; set; }
-    public string qt { get; set; }
-    public string q_url { get; set; }
-    public int q_id { get; set; }
-    public string an { get; set; }
+    [JsonProperty("a_url")]
+    public string AUrl { get; set; }
+
+    [JsonProperty("qt")]
+    public string Qt { get; set; }
+
+    [JsonProperty("q_url")]
+    public string QUrl { get; set; }
+
+    [JsonProperty("q_id")]
+    public int QId { get; set; }
+
+    [JsonProperty("an")]
+    public string An { get; set; }
   }
 }
