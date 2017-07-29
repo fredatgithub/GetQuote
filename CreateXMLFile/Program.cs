@@ -12,7 +12,7 @@ namespace CreateXMLFile
       const string fileName = "quotes-cleaned.txt";
       const string XmlFileName = "quotes-XML.txt";
       Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
-      dicoQuotes = LoadDictionary(fileName);
+      dicoQuotes = LoadDictionaryTwoLines(fileName);
       // create XML file
       if (!File.Exists(XmlFileName))
       {
@@ -58,7 +58,7 @@ namespace CreateXMLFile
       return result.ToString();
     }
 
-    private static Dictionary<string, string> LoadDictionary(string fileName)
+    private static Dictionary<string, string> LoadDictionaryTwoLines(string fileName)
     {
       Dictionary<string, string> result = new Dictionary<string, string>();
       if (!File.Exists(fileName)) return result;
@@ -80,6 +80,34 @@ namespace CreateXMLFile
         //{
         //  Console.WriteLine(quotesList[i]);
         //}
+      }
+
+      return result;
+    }
+
+    private static Dictionary<string, string> LoadDictionaryOneLines(string fileName)
+    {
+      Dictionary<string, string> result = new Dictionary<string, string>();
+      if (!File.Exists(fileName)) return result;
+      List<string> quotesList = new List<string>();
+      StreamReader sr = new StreamReader(fileName);
+      string line = string.Empty;
+      while ((line = sr.ReadLine()) != null)
+      {
+        quotesList.Add(line);
+      }
+
+      var tmpArrayQuote = quotesList.ToArray();
+      for (int i = 0; i < quotesList.Count; i++)
+      {
+        string tmpQuote = tmpArrayQuote[i];
+        string tmpKey = tmpQuote.Substring(0, tmpQuote.IndexOf('-') - 2);
+        string tmpValue = tmpQuote.Substring(tmpQuote.IndexOf('-') + 2, tmpQuote.Length - tmpQuote.IndexOf('-') + 2);
+
+      if (!result.ContainsKey(tmpKey))
+        {
+          result.Add(tmpKey, tmpValue);
+        }
       }
 
       return result;

@@ -35,9 +35,6 @@ namespace GetQuote2
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/c_s_lewis.html?vm=l");
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/charles_dickens.html?vm=l");
       //ListOfURLs.Add("");
-      //ListOfURLs.Add("");
-      //ListOfURLs.Add("");
-      //ListOfURLs.Add("");
 
       for (int i = 0; i < alphabet.Length; i++)
       {
