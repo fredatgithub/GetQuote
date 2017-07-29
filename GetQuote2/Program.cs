@@ -23,7 +23,30 @@ namespace GetQuote2
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/m/mark_twain_3.html");
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/m/mahatma_gandhi.html?vm=l");
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/buddha.html?vm=l");
-      ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/o/oscar_wilde.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/o/oscar_wilde.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/w/william_shakespeare.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/a/a_p_j_abdul_kalam.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/a/albert_einstein.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/w/winston_churchill.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/benjamin_franklin.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/bruce_lee.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/blaise_pascal.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/c_s_lewis.html?vm=l");
+      ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/charles_dickens.html?vm=l");
+      //ListOfURLs.Add("");
+      //ListOfURLs.Add("");
+      //ListOfURLs.Add("");
+      //ListOfURLs.Add("");
+
+      /*
+        <div class="block-sm-holder-az">
+        <a href="/quotes/authors/d/dalai_lama.html" class="block-sm-az">
+        <span class="link-name">Dalai Lama</span>
+        </a>
+        </div>
+       */
+
+      ListOfURLs = GetAuthorCategory("https://www.brainyquote.com/authors/d");
 
       foreach (string oneQuote in ListOfURLs)
       {
@@ -45,6 +68,13 @@ namespace GetQuote2
            
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
+    }
+
+    private static List<string> GetAuthorCategory(string url)
+    {
+      var result = new List<string>();
+
+      return result;
     }
 
     private static string Conjugate(string verb, int number)
