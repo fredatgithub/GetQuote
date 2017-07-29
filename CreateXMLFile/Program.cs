@@ -9,22 +9,22 @@ namespace CreateXMLFile
   {
     private static void Main()
     {
-      const string fileName = "quotes-cleaned.txt";
+      const string fileName = "quotes.txt";
       const string XmlFileName = "quotes-XML.txt";
       Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
-      dicoQuotes = LoadDictionaryTwoLines(fileName);
+      dicoQuotes = LoadDictionaryOneLines(fileName);
       // create XML file
       if (!File.Exists(XmlFileName))
       {
         StreamWriter sw2 = new StreamWriter(XmlFileName, false);
-        sw2.WriteLine(string.Empty);
+        //sw2.WriteLine(string.Empty);
         sw2.Close();
       }
 
       StreamWriter sw = new StreamWriter(XmlFileName, false);
       foreach (KeyValuePair<string, string> keyValuePair in dicoQuotes)
       {
-        sw.WriteLine(CreateOneQuote(keyValuePair.Value, keyValuePair.Key));
+        sw.WriteLine(CreateOneQuote(keyValuePair.Key, keyValuePair.Value));
       }
 
       sw.Close();
@@ -41,7 +41,7 @@ namespace CreateXMLFile
       result.Append(author);
       result.Append("</Author>");
       result.Append(Environment.NewLine);
-      result.Append("<Language>French</Language>");
+      result.Append("<Language>English</Language>");
       result.Append(Environment.NewLine);
       result.Append("<QuoteValue>");
       result.Append(theQuote.EndsWith(".")?theQuote.Substring(0, theQuote.Length-1):theQuote);
@@ -101,8 +101,11 @@ namespace CreateXMLFile
       for (int i = 0; i < quotesList.Count; i++)
       {
         string tmpQuote = tmpArrayQuote[i];
-        string tmpKey = tmpQuote.Substring(0, tmpQuote.IndexOf('-') - 2);
-        string tmpValue = tmpQuote.Substring(tmpQuote.IndexOf('-') + 2, tmpQuote.Length - tmpQuote.IndexOf('-') + 2);
+        int index = tmpQuote.IndexOf('-');
+        string tmpKey = tmpQuote.Substring(0, index - 1);
+        int start = index + 2;
+        int startPlusEnd = tmpQuote.Length  - index - 2;
+        string tmpValue = tmpQuote.Substring(start, startPlusEnd).TrimEnd('.');
 
       if (!result.ContainsKey(tmpKey))
         {
