@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
-using Jurassic.Library;
+using Newtonsoft.Json;
 
 namespace GetQuote2
 {
@@ -50,68 +50,62 @@ namespace GetQuote2
       HtmlDocument resultat = new HtmlDocument();
       resultat.LoadHtml(source);
 
-      HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+      HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
       doc.LoadHtml(source);
 
       // get only the one with quotes
       // and then var result = JsonConvert.DeserializeObject<List<Quote>>(json);
-      var script = doc.DocumentNode.Descendants()
-        .Where(n => n.Name == "script")
-        .First().InnerText;
+      //var script = doc.DocumentNode.Descendants()
+      //  .Where(n => n.Name == "script")
+      //.First().InnerText;
 
-      // Return the data of spect and stringify it into a proper JSON object
-      var engine = new Jurassic.ScriptEngine();
-      var result = engine.Evaluate("(function() { " + script + " return splashQuoteJson; })()");
-      var json = JSONObject.Stringify(engine, result);
+      HtmlWeb hwObject = new HtmlWeb();
+      HtmlDocument htmldocObject = hwObject.Load("https://www.brainyquote.com/quotes/authors/h/helen_rowland.html");
+      var listOfquotes = new List<string>();
+      foreach (var script in doc.DocumentNode.Descendants("script").ToArray())
+      {
+        string s = script.InnerText;
+        if (s.Contains("splashQuoteJson"))
+        {
+          // remove header and footer (;)
+          s = s.Substring(0, s.Length - 2); // removing ;
+          s = s.Substring("var splashQuoteJson = ".Length + 1);
+          listOfquotes.Add(s);
+        }
 
-      Console.WriteLine(json);
+      }
 
-      //List<HtmlNode> quotes = resultat.DocumentNode.Descendants().Where
-      //(x => x.Name == "div" && x.Attributes["class"] != null &&
-      //      x.Attributes["class"].Value.Contains("text-center")).ToList();
-      //if (quotes.Count != 0)
-      //{
-      //  string tmpKey = quotes[0].InnerText.Trim();
-      //  tmpKey = tmpKey.Replace('"', ' ').Trim();
-      //  if (tmpKey.StartsWith('"'.ToString()))
-      //  {
-      //    tmpKey = tmpKey.Substring(1, tmpKey.Length - 2);
-      //  }
 
-      //  Console.WriteLine(tmpKey);
-      //  string tmpValue = quotes[1].InnerText.Trim();
-      //  tmpValue = tmpValue.Replace('“', ' ').Trim();
-      //  tmpValue = tmpValue.Replace('”', ' ').Trim();
-      //  Console.WriteLine(tmpValue);
-      //  if (!dicoQuotes.ContainsKey(tmpKey))
-      //  {
-      //    dicoQuotes.Add(tmpKey, tmpValue);
-      //  }
-      //}
+      //Console.WriteLine(listOfquotes[0]);
+      var result = JsonConvert.DeserializeObject<List<Quote>>(listOfquotes[0]);
 
-      //const string fileName = "quotes.txt";
-      //if (dicoQuotes.Count != 0)
-      //{
-      //  if (!File.Exists(fileName))
-      //  {
-      //    StreamWriter sw2 = new StreamWriter(fileName, false);
-      //    sw2.WriteLine(string.Empty);
-      //    sw2.Close();
-      //  }
+      foreach (var item in result)
+      {
+        Console.WriteLine($"{item.An} - {item.Qt}");
+      }
 
-      //  // before adding to file, check if it doesn't exist already
-      //  if (!QuoteAlreadySaved(dicoQuotes.Keys.First(), fileName))
-      //  {
-      //    StreamWriter sw = new StreamWriter(fileName, true);
-      //    foreach (var quote in dicoQuotes)
-      //    {
-      //      sw.WriteLine(quote.Key);
-      //      sw.WriteLine(quote.Value);
-      //    }
+      const string fileName = "quotes.txt";
+      if (result.Count != 0)
+      {
+        if (!File.Exists(fileName))
+        {
+          StreamWriter sw2 = new StreamWriter(fileName, false);
+          sw2.WriteLine(string.Empty);
+          sw2.Close();
+        }
 
-      //    sw.Close();
-      //  }
-      //}
+        //  // before adding to file, check if it doesn't exist already
+        
+        foreach (var item in result)
+        {
+          if (!QuoteAlreadySaved($"{item.An} - {item.Qt}", fileName))
+          {
+            StreamWriter sw = new StreamWriter(fileName, true);
+            sw.WriteLine($"{item.An} - {item.Qt}");
+            sw.Close();
+          }
+        }
+      }
     }
 
     private static bool QuoteAlreadySaved(string oneQuote, string fileName)
