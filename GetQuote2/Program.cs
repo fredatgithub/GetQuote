@@ -11,6 +11,7 @@ namespace GetQuote2
   {
     private static void Main()
     {
+      Console.WriteLine("Please wait for this program to get all quotes.");
       string alphabet = "abcdefghijklmnopqrstuvwxyz";
       int totalNumberOfNewQuotes = 0;
       var ListOfURLs = new List<string>();
@@ -39,6 +40,10 @@ namespace GetQuote2
       for (int i = 0; i < alphabet.Length; i++)
       {
         ListOfURLs.AddRange(GetAuthorCategory($"https://www.brainyquote.com/authors/{alphabet[i]}"));
+        if (i > 1 && i < 10)
+        {
+          ListOfURLs.AddRange(GetAuthorCategory($"https://www.brainyquote.com/authors/{alphabet[i]}{i}"));
+        }
       }
 
       //ListOfURLs = GetAuthorCategory("https://www.brainyquote.com/authors/d");
@@ -91,6 +96,28 @@ namespace GetQuote2
           result.Add($"https://www.brainyquote.com{oneNode}");
         }
       }
+
+      // check other links
+      // <tbody>
+      /*
+        < tr >
+        < td >
+        < a href = "/quotes/authors/c/c_s_forester.html" > C.S.Forester </ a >
+         </ td >
+      */
+      var nodes2 = htmldocObject.DocumentNode.Descendants("a")
+        .Where(x => x.Attributes["href"] != null)
+        .Select(t => t.Attributes["href"].Value)
+                           .ToList();
+
+      foreach (var oneNode in nodes2)
+      {
+        if (oneNode.Contains("/quotes/authors/"))
+        {
+          result.Add($"https://www.brainyquote.com{oneNode}");
+        }
+      }
+
       return result;
     }
 
