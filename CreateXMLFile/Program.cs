@@ -9,7 +9,7 @@ namespace CreateXMLFile
   {
     private static void Main()
     {
-      const string fileName = "quotes.txt";
+      const string fileName = "quotes-1.txt";
       const string XmlFileName = "quotes-XML.txt";
       Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
       dicoQuotes = LoadDictionaryOneLines(fileName);
@@ -24,7 +24,7 @@ namespace CreateXMLFile
       StreamWriter sw = new StreamWriter(XmlFileName, false);
       foreach (KeyValuePair<string, string> keyValuePair in dicoQuotes)
       {
-        sw.WriteLine(CreateOneQuote(keyValuePair.Key, keyValuePair.Value));
+        sw.WriteLine(CreateOneQuote(keyValuePair.Value, keyValuePair.Key));
       }
 
       sw.Close();
@@ -107,9 +107,9 @@ namespace CreateXMLFile
         int startPlusEnd = tmpQuote.Length  - index - 2;
         string tmpValue = tmpQuote.Substring(start, startPlusEnd).TrimEnd('.');
 
-      if (!result.ContainsKey(tmpKey))
+      if (!result.ContainsKey(tmpValue))
         {
-          result.Add(tmpKey, tmpValue);
+          result.Add(tmpValue, tmpKey);
         }
       }
 
