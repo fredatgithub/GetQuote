@@ -11,6 +11,7 @@ namespace GetQuote2
   {
     private static void Main()
     {
+      string alphabet = "abcdefghijklmnopqrstuvwxyz";
       int totalNumberOfNewQuotes = 0;
       var ListOfURLs = new List<string>();
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/h/helen_rowland.html");
@@ -32,21 +33,18 @@ namespace GetQuote2
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/bruce_lee.html?vm=l");
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/b/blaise_pascal.html?vm=l");
       //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/c_s_lewis.html?vm=l");
-      ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/charles_dickens.html?vm=l");
+      //ListOfURLs.Add("https://www.brainyquote.com/quotes/authors/c/charles_dickens.html?vm=l");
       //ListOfURLs.Add("");
       //ListOfURLs.Add("");
       //ListOfURLs.Add("");
       //ListOfURLs.Add("");
 
-      /*
-        <div class="block-sm-holder-az">
-        <a href="/quotes/authors/d/dalai_lama.html" class="block-sm-az">
-        <span class="link-name">Dalai Lama</span>
-        </a>
-        </div>
-       */
+      for (int i = 0; i < alphabet.Length; i++)
+      {
+        ListOfURLs.AddRange(GetAuthorCategory($"https://www.brainyquote.com/authors/{alphabet[i]}"));
+      }
 
-      ListOfURLs = GetAuthorCategory("https://www.brainyquote.com/authors/d");
+      //ListOfURLs = GetAuthorCategory("https://www.brainyquote.com/authors/d");
 
       foreach (string oneQuote in ListOfURLs)
       {
@@ -72,8 +70,30 @@ namespace GetQuote2
 
     private static List<string> GetAuthorCategory(string url)
     {
+      /*
+        <div class="block-sm-holder-az">
+        <a href="/quotes/authors/d/dalai_lama.html" class="block-sm-az">
+        <span class="link-name">Dalai Lama</span>
+        </a>
+        </div>
+       */
       var result = new List<string>();
+      //https://www.brainyquote.com/authors/d
+      HtmlWeb hwObject = new HtmlWeb();
+      HtmlDocument htmldocObject = hwObject.Load(url);
+      var nodes = htmldocObject.DocumentNode.Descendants("a")
+        .Where(x => x.Attributes["class"] != null
+                           && x.Attributes["class"].Value == "block-sm-az")
+        .Select(t=> t.Attributes["href"].Value)
+                           .ToList();
 
+      foreach (var oneNode in nodes)
+      {
+        if (oneNode.Contains("/quotes/authors/"))
+        {
+          result.Add($"https://www.brainyquote.com{oneNode}");
+        }
+      }
       return result;
     }
 
