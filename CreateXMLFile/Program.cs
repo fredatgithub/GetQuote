@@ -9,7 +9,7 @@ namespace CreateXMLFile
   {
     private static void Main()
     {
-      const string fileName = "quotes-1.txt";
+      const string fileName = "quotes.txt";
       const string XmlFileName = "quotes-XML.txt";
       Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
       dicoQuotes = LoadDictionaryOneLines(fileName);
