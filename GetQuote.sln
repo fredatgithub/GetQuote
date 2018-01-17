@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetQuote2", "GetQuote2\GetQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeserializeJson", "DeserializeJson\DeserializeJson.csproj", "{0E992F9A-DD1B-46D2-BACF-591B7D4FB9B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetDico", "GetDico\GetDico.csproj", "{9ECB70D3-05D4-4D4B-9892-89CF8A20C770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0E992F9A-DD1B-46D2-BACF-591B7D4FB9B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E992F9A-DD1B-46D2-BACF-591B7D4FB9B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E992F9A-DD1B-46D2-BACF-591B7D4FB9B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ECB70D3-05D4-4D4B-9892-89CF8A20C770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECB70D3-05D4-4D4B-9892-89CF8A20C770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECB70D3-05D4-4D4B-9892-89CF8A20C770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECB70D3-05D4-4D4B-9892-89CF8A20C770}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

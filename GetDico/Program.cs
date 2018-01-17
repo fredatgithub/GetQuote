@@ -5,17 +5,22 @@ using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
 
-namespace GetQuote
+namespace GetDico
 {
-  internal static class Program
+  internal class Program
   {
     private static void Main()
     {
-      const int numberOfQuotes = 1000;
-      for (int i = 0; i < numberOfQuotes; i++)
+      // get dico from
+      // http://www.dictionnaire-juridique.com/index.php
+
+      // get initial page like index.php and then all recursive ones
+      const int numberOfPages = 1000;
+      for (int i = 0; i < numberOfPages; i++)
       {
         GetQuote();
       }
+
 
       Console.WriteLine("Press a key to exit:");
       Console.ReadKey();
@@ -24,7 +29,7 @@ namespace GetQuote
     private static void GetQuote()
     {
       // Create a request for the URL. 
-      WebRequest request = WebRequest.Create("http://www.badnuke.com/");
+      WebRequest request = WebRequest.Create("http://www.dictionnaire-juridique.com/index.php");
       // If required by the server, set the credentials.
       //request.Credentials = CredentialCache.DefaultCredentials;
       // Get the response.
@@ -43,7 +48,7 @@ namespace GetQuote
       // Display the content.
       //Console.WriteLine(responseFromServer);
       // parcours du DOM et recherche de <div class="text-center">
-      Dictionary<string, string> dicoQuotes = new Dictionary<string, string>();
+      Dictionary<string, string> dicoPages = new Dictionary<string, string>();
       var source = WebUtility.HtmlDecode(responseFromServer);
       HtmlDocument resultat = new HtmlDocument();
       resultat.LoadHtml(source);
@@ -64,14 +69,14 @@ namespace GetQuote
         tmpValue = tmpValue.Replace('“', ' ').Trim();
         tmpValue = tmpValue.Replace('”', ' ').Trim();
         Console.WriteLine(tmpValue);
-        if (!dicoQuotes.ContainsKey(tmpKey))
+        if (!dicoPages.ContainsKey(tmpKey))
         {
-          dicoQuotes.Add(tmpKey, tmpValue);
+          dicoPages.Add(tmpKey, tmpValue);
         }
       }
 
       const string fileName = "quotes.txt";
-      if (dicoQuotes.Count != 0)
+      if (dicoPages.Count != 0)
       {
         if (!File.Exists(fileName))
         {
@@ -81,10 +86,10 @@ namespace GetQuote
         }
 
         // before adding to file, check if it doesn't exist already
-        if (!QuoteAlreadySaved(dicoQuotes.Keys.First(), fileName))
+        if (!QuoteAlreadySaved(dicoPages.Keys.First(), fileName))
         {
           StreamWriter sw = new StreamWriter(fileName, true);
-          foreach (var quote in dicoQuotes)
+          foreach (var quote in dicoPages)
           {
             sw.WriteLine(quote.Key);
             sw.WriteLine(quote.Value);
