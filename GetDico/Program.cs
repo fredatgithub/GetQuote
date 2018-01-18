@@ -29,7 +29,8 @@ namespace GetDico
     private static void GetQuote()
     {
       // Create a request for the URL. 
-      WebRequest request = WebRequest.Create("http://www.dictionnaire-juridique.com/index.php");
+      string webUrl = @"http://www.dictionnaire-juridique.com/index.php";
+      WebRequest request = WebRequest.Create(webUrl);
       // If required by the server, set the credentials.
       //request.Credentials = CredentialCache.DefaultCredentials;
       // Get the response.
