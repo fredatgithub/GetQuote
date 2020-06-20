@@ -16,3 +16,14 @@ D:\dev\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml
 C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.dll
 C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\fred\Documents\Visual Studio 2012\Projects\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\GetQuote.exe.config
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\GetQuote.exe
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\GetQuote.pdb
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.dll
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\user1\source\repos\GetQuote\GetQuote\bin\Debug\HtmlAgilityPack.xml
+C:\Users\user1\source\repos\GetQuote\GetQuote\obj\Debug\GetQuote.csprojAssemblyReference.cache
+C:\Users\user1\source\repos\GetQuote\GetQuote\obj\Debug\GetQuote.csproj.CoreCompileInputs.cache
+C:\Users\user1\source\repos\GetQuote\GetQuote\obj\Debug\GetQuote.csproj.CopyComplete
+C:\Users\user1\source\repos\GetQuote\GetQuote\obj\Debug\GetQuote.exe
+C:\Users\user1\source\repos\GetQuote\GetQuote\obj\Debug\GetQuote.pdb
